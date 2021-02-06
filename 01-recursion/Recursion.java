@@ -27,7 +27,7 @@ public class Recursion {
   *@param guess : guess any number for the sqrt of n
   *@return the approximate sqrt of n within a tolerance of 0.001%
   */
-  public static double sqrt(double n, double guess) {
+  private static double sqrt(double n, double guess) {
     if (Math.abs((guess * guess - n) / n) * 100 < 0.001) { //done until guess squared is close to n by a % difference of some threshold
       return guess;
     }
@@ -37,11 +37,11 @@ public class Recursion {
   /*
   *@param length how long the words must be
   *param word the variable to store the partial solution (should start at "")
-  *@return the number of words that have no adjacent matching letters using the letters a-z.
-  *Repetition allowed except when letters are adjacent.
+  *@return the number of words that have no adjacent matching letters using the letters a-z
+  *Repetition allowed except when letters are adjacent
   */
-  public static long countNoDoubleLetterWords(int length,String word){
-    //Hint: not a wrapper method, but you must call it starting with "" as your word.
+  public static long countNoDoubleLetterWords(int length, String word){
+    //Hint: not a wrapper method, but you must call it starting with "" as your word
     if (length == 0) {
       return 1; //when word is the correct length, count 1
     } else {
