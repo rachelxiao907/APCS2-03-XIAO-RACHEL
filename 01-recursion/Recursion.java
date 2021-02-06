@@ -48,7 +48,7 @@ public class Recursion {
       long ans = 0;
       for (char c = 'a'; c <= 'z'; c++) {
         if (word.length() == 0 || c != word.charAt(word.length()-1)) {
-          ans = 1 + countNoDoubleLetterWords(length-1, word + c);
+          ans += countNoDoubleLetterWords(length-1, word + c); //increment from ans
         }
       }
       return ans;
