@@ -20,7 +20,7 @@ public class Recursion {
     if (n == 0) {
       return 0;
     }
-    return sqrt(n, n / 2); //guess any number for the sqrt of n. (like n/2, or even 1)
+    return sqrt(n, 1); //guess any number for the sqrt of n. (like n/2, or even 1)
   }
   /*
   *@param n : any non-negative value you want to take the sqrt of
@@ -55,10 +55,57 @@ public class Recursion {
     }
   }
 
+  /* TESTING
   public static void main(String[] args) {
-    System.out.println(reverse("abcd"));
-    System.out.println(sqrt(100));
-    System.out.println(countNoDoubleLetterWords(2, ""));
+    System.out.println("\nTesting reverse");
+    reverseTester("abcd");
+    reverseTester("omg does this even work");
+    reverseTester("this is crazy");
+    System.out.println("--------------------------------");
+
+    System.out.println("\nTesting sqrt");
+    System.out.println(sqrt(100)); //return 10
+    System.out.println(sqrt(49)); //return 7
+    System.out.println(sqrt(0)); //return 0
+    System.out.println(sqrt(35)); //return 5.916
+    System.out.println(sqrt(10)); //return 3.162
+    System.out.println(sqrt(2)); //return 1.414
+    System.out.println(sqrt(5)); //return 2.236
+    System.out.println(sqrt(4.5)); //return 2.121
+    System.out.println("--------------------------------");
+
+    System.out.println("\nTesting countNoDoubleLetterWords");
+    //System.out.println(countNoDoubleLetterWords(2, ""));
+    countNoDoubleLetterWordsTester(1);
+    countNoDoubleLetterWordsTester(3);
+    countNoDoubleLetterWordsTester(6);
+    System.out.println("--------------------------------");
   }
+
+  //return WRONG when there is an error
+  public static void reverseTester(String str) {
+    String actual = reverse(str);
+    String expected = "";
+    if (str.length() > 0) {
+      for (int i = str.length()-1; i >= 0; i--) {
+        expected += str.charAt(i);
+      }
+    }
+    if (!actual.equals(expected)) {
+      System.out.println("WRONG");
+    }
+    System.out.println("actual:   " + actual);
+    System.out.println("expected: " + expected);
+  }
+  public static void countNoDoubleLetterWordsTester(int length) {
+    long actual = countNoDoubleLetterWords(length, "");
+    long expected = 26 * (long)Math.pow(25, length-1);
+    if (actual != expected) {
+      System.out.println("WRONG");
+    }
+    System.out.println("actual:   " + actual);
+    System.out.println("expected: " + expected);
+  }
+  */
 
 }
