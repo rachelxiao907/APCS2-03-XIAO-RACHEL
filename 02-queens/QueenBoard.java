@@ -9,6 +9,11 @@ public class QueenBoard {
 
   //private methods
   private boolean addQueen(int r, int c) {
+    if (board[r][c] != 0) { //if square has a queen or is threatened
+      return false;
+    } else {
+      board[r][c] = -1; //add queen to square
+    }
     return true;
   }
   private void removeQueen(int r, int c) {
