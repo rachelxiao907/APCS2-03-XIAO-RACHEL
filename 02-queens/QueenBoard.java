@@ -29,7 +29,20 @@ public class QueenBoard {
   *excludes the character up to the *)
   */
   public String toString() {
-    return "";
+    String ans = "";
+    for (int r = 0; r < board.length; r++) {
+      for (int c = 0; c < board[r].length; c++) {
+        if (board[r][c] == -1) {
+          ans += "Q ";
+        } else {
+          ans += "_ ";
+        }
+        if (c == board[r].length-1) {
+          ans += "\n";
+        }
+      }
+    }
+    return ans;
   }
   /**Find the first solution configuration possible for this size board. Start by placing
   *  the 1st queen in the top left corner, and each new queen in the next COLUMN. When backtracking
@@ -50,5 +63,5 @@ public class QueenBoard {
   public int countSolutions() {
     return 0;
   }
-  
+
 }
