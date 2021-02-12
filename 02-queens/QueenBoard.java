@@ -14,6 +14,9 @@ public class QueenBoard {
     } else {
       board[r][c] = -1; //add queen to square
     }
+    for (int x = 1; x+c < board.length; x++) {
+      board[r][c+x]++; //squares in the same row as queen are threatened
+    }
     return true;
   }
   private void removeQueen(int r, int c) {
