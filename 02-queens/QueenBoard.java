@@ -18,13 +18,21 @@ public class QueenBoard {
     for (int x = 1; x + c < board.length; x++) {
                        //can only have 1 queen in each column, so we don't need to mark column's squares
       board[r][c+x]++; //squares in the same row as queen are threatened
-      if (r + x < board.length) board[r+x][c+x]++; //squares in the upward diagonal are threatened
-      if (r - x >= 0) board[r-x][c+x]++; //squares in the downward diagonal are threatened
+      if (r - x >= 0) board[r-x][c+x]++; //squares in the upward diagonal are threatened
+      if (r + x < board.length) board[r+x][c+x]++; //squares in the downward diagonal are threatened
     }
     return true;
   }
   private void removeQueen(int r, int c) {
-
+    if (board[r][c] == -1) { //if square has a queen
+      board[r][c] = 0; //remove queen from square
+      //unmark squares to the right of the queen
+      for (int x = 1; x + c < board.length; x++) {
+        board[r][c+x]--; //squares in the same row as queen are not threatened anymore
+        if (r - x >= 0) board[r-x][c+x]--; //squares in the upward diagonal are not threatened anymore
+        if (r + x < board.length) board[r+x][c+x]--; //squares in the downward diagonal are not threatened anymore
+      }
+    }
   }
 
   //public methods
