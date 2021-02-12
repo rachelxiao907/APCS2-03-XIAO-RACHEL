@@ -8,14 +8,18 @@ public class QueenBoard {
   }
 
   //private methods
-  private boolean addQueen(int r, int c) {
+  public boolean addQueen(int r, int c) {
     if (board[r][c] != 0) { //if square has a queen or is threatened
       return false;
     } else {
       board[r][c] = -1; //add queen to square
     }
+    //only need to mark squares to the right of the queen
     for (int x = 1; x+c < board.length; x++) {
+                       //can only have 1 queen in each column, so we don't need to mark column's squares
       board[r][c+x]++; //squares in the same row as queen are threatened
+      board[r+x][c+x]++; //squares in the upward diagonal are threatened
+      board[r-x][c+x]++; //squares in the downward diagonal are threatened
     }
     return true;
   }
