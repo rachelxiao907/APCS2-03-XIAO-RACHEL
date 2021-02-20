@@ -64,6 +64,7 @@ public class QueenBoard {
     }
     return ans;
   }
+
   /**Find the first solution configuration possible for this size board. Start by placing
   *  the 1st queen in the top left corner, and each new queen in the next COLUMN. When backtracking
   *  move the previous queen down to the next valid space. This means everyone will generate the same
@@ -73,7 +74,22 @@ public class QueenBoard {
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you solved a 2nd time.)
   */
   public boolean solve() {
-    return true;
+    return solve(0);
+  }
+  /**
+  *@param c : the column is the count of how many queens have been added
+  *@return false when the board is not solveable and leaves the board filled with zeros;
+  *        returns true when the board is solveable, and leaves the board in a solved state
+  */
+  public boolean solve(int c) {
+    //If you reach column == board.length, you have run out of space and thus added n queens
+    if (c >= board.length) return true;
+    for (int r = 0; r < board.length; r++) {
+      if (addQueen(r, c)) {
+        solve(c+1);
+      }
+    }
+    return false;
   }
 
   /**Find all possible solutions to this size board.
