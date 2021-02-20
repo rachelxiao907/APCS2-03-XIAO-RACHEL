@@ -82,11 +82,14 @@ public class QueenBoard {
   *        returns true when the board is solveable, and leaves the board in a solved state
   */
   public boolean solve(int c) {
-    //If you reach column == board.length, you have run out of space and thus added n queens
-    if (c >= board.length) return true;
-    for (int r = 0; r < board.length; r++) {
-      if (addQueen(r, c)) {
-        solve(c+1);
+    if (c >= board.length) return true; ////if you reach column == board.length, you have run out of space and thus added n queens
+    for (int r = 0; r < board.length; r++) { //try all rows in a given column
+      if (addQueen(r, c)) { //if a queen can be placed
+        if (solve(c+1)) { //try placing queen in the next column
+          return true;
+        } else {
+          removeQueen(r, c); //backtracking by moving queen to next row if queen cannot be placed in next column
+        }
       }
     }
     return false;
