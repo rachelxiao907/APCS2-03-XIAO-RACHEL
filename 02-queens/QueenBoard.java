@@ -64,6 +64,16 @@ public class QueenBoard {
     }
     return ans;
   }
+  public boolean isEmpty() {
+    for (int r = 0; r < board.length; r++) {
+      for (int c = 0; c < board.length; c++) {
+        if (board[r][c] != 0) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
   /**Find the first solution configuration possible for this size board. Start by placing
   *  the 1st queen in the top left corner, and each new queen in the next COLUMN. When backtracking
@@ -92,7 +102,7 @@ public class QueenBoard {
         }
       }
     }
-    return false;
+    return false; //if none of the rows work, the board is unsolvable
   }
 
   /**Find all possible solutions to this size board.
