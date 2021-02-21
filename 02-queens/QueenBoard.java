@@ -64,16 +64,6 @@ public class QueenBoard {
     }
     return ans;
   }
-  public boolean isEmpty() {
-    for (int r = 0; r < board.length; r++) {
-      for (int c = 0; c < board.length; c++) {
-        if (board[r][c] != 0) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
 
   /**Find the first solution configuration possible for this size board. Start by placing
   *  the 1st queen in the top left corner, and each new queen in the next COLUMN. When backtracking
@@ -84,6 +74,13 @@ public class QueenBoard {
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you solved a 2nd time.)
   */
   public boolean solve() {
+    for (int r = 0; r < board.length; r++) {
+      for (int c = 0; c < board[r].length; c++) {
+        if (board[r][c] != 0) {
+          throw new IllegalStateException();
+        }
+      }
+    }
     return solve(0);
   }
   /**
