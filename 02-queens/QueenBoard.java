@@ -53,11 +53,14 @@ public class QueenBoard {
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[r].length; c++) {
         if (board[r][c] == -1) {
-          ans += "Q ";
+          ans += "Q";
         } else {
-          ans += "_ ";
+          ans += "_";
         }
-        if (c == board[r].length-1) {
+        if (c != board[r].length-1) { //if not end of line, add space
+          ans += " ";
+        }
+        if (r != board.length-1 && c == board[r].length-1) {
           ans += "\n";
         }
       }
