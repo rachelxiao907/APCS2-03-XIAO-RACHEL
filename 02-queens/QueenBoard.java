@@ -77,7 +77,7 @@ public class QueenBoard {
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[r].length; c++) {
         if (board[r][c] != 0) {
-          throw new IllegalStateException();
+          throw new IllegalStateException("board starts with a non-zero value");
         }
       }
     }
@@ -107,6 +107,13 @@ public class QueenBoard {
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you ran solve() before this method)
   */
   public int countSolutions() {
+    for (int r = 0; r < board.length; r++) {
+      for (int c = 0; c < board[r].length; c++) {
+        if (board[r][c] != 0) {
+          throw new IllegalStateException("board starts with a non-zero value");
+        }
+      }
+    }
     return countSolutions(0);
   }
   public int countSolutions(int c) {
