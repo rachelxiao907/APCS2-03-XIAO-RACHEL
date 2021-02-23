@@ -89,13 +89,13 @@ public class QueenBoard {
   *        returns true when the board is solveable, and leaves the board in a solved state
   */
   public boolean solve(int c) {
-    if (c >= board.length) return true; ////if you reach column == board.length, you have run out of space and thus added n queens
+    if (c >= board.length) return true; //if you reach column == board.length, you have run out of space and thus added n queens
     for (int r = 0; r < board.length; r++) { //try all rows in a given column
       if (addQueen(r, c)) { //if a queen can be placed
         if (solve(c+1)) { //try placing queen in the next column
           return true;
         } else {
-          removeQueen(r, c); //backtracking by moving queen to next row if queen cannot be placed in next column
+          removeQueen(r, c); //backtracking: move queen to next row if queen cannot be placed in next column
         }
       }
     }
@@ -107,7 +107,19 @@ public class QueenBoard {
   *@throws IllegalStateException when the board starts with any non-zero value (e.g. you ran solve() before this method)
   */
   public int countSolutions() {
-    return 0;
+    return countSolutions(0);
+  }
+  public int countSolutions(int c) {
+    if (c >= board.length) return 1; //if you found one solution, count 1
+    int count = 0;
+    for (int r = 0; r < board.length; r++) { //try all rows in a given column
+      if (addQueen(r, c)) { //only when you successfully add a queen do you need a recursive call
+        count += countSolutions(c+1); //countSolutions returns the sum of all recursive calls (adds 1 if there is a solution)
+                           //after recursive call finishes, take returned value and keep track of it so you can try other spaces in the column
+        removeQueen(r, c); //backtracking: remove queen to try next position in column for solutions
+      }
+    }
+    return count; //returns the number of solutions
   }
 
 }
