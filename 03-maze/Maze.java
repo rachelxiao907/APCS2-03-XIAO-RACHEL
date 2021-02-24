@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 public class Maze{
 
-  private char[][]maze;
+  private char[][] maze;
   private boolean animate;//false by default
 
   /*Constructor loads a maze text file, and sets animate to false by default.
@@ -19,7 +19,19 @@ public class Maze{
     So you don't have to check for out of bounds!
   */
   public Maze(String filename) throws FileNotFoundException{
-      //COMPLETE CONSTRUCTOR
+    File text = new File (filename);
+    Scanner inf = new Scanner(text);
+    ArrayList<String> arr = new ArrayList<String>();
+    while(inf.hasNextLine()) {
+      arr.add(inf.nextLine());
+    }
+    int lines = arr.size();
+    int chars = arr.get(0).length();
+    maze = new char[lines][chars];
+    for (int i = 0; i < lines; i ++) {
+      maze[i] = arr.get(i).toCharArray(); //make each line into char array and assign to an element of maze
+    }
+    animate = false;
   }
 
   private void wait(int millis){
@@ -75,7 +87,7 @@ public class Maze{
     Postcondition:
       The S and 'E' remain the same.
       All visited spots that were not part of the solution are changed to '.'
-      All visited spots that are part of the solution are changed to '$'
+      All visited spots that are part of the solution are changed to '@'
   */
   private int solve(int row, int col){ //you can add more parameters since this is private
       //automatic animation! You are welcome.
