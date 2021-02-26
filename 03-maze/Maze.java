@@ -1,6 +1,6 @@
 import java.util.*;
 import java.io.*;
-public class Maze{
+public class Maze {
 
   private char[][] maze;
   private boolean animate;//false by default
@@ -18,13 +18,15 @@ public class Maze{
     You may also assume the maze has a border of '#' around the edges.
     So you don't have to check for out of bounds!
   */
-  public Maze(String filename) throws FileNotFoundException{
+  public Maze(String filename) throws FileNotFoundException {
     File text = new File (filename);
     Scanner inf = new Scanner(text);
     ArrayList<String> arr = new ArrayList<String>();
+
     while(inf.hasNextLine()) {
-      arr.add(inf.nextLine());
+      arr.add(inf.nextLine()); //add each line to ArrayList
     }
+
     int lines = arr.size();
     int chars = arr.get(0).length();
     maze = new char[lines][chars];
@@ -35,20 +37,20 @@ public class Maze{
   }
 
   private void wait(int millis){
-       try {
-           Thread.sleep(millis);
-       }
-       catch (InterruptedException e) {
-       }
+    try {
+      Thread.sleep(millis);
+    }
+    catch (InterruptedException e) {
+    }
    }
 
   public void setAnimate(boolean b){
-      animate = b;
+    animate = b;
   }
 
   public static void clearTerminal(){
-      //erase terminal
-      System.out.println("\033[2J");
+    //erase terminal
+    System.out.println("\033[2J");
   }
   public static void gotoTop(){
     //go to top left of screen
@@ -59,7 +61,16 @@ public class Maze{
    It should look like the text file with some characters replaced.
   */
   public String toString(){
-          return "WRITE THIS METHOD";
+    String output = "";
+    for (int i = 0; i < maze.length; i ++) {
+      for (int j = 0; j < maze[i].length; j++) {
+        output += maze[i][j];
+      }
+      if (i != maze.length-1) {
+        output += "\n";
+      }
+    }
+    return output;
   }
 
   /*Wrapper Solve Function returns the helper function
@@ -85,7 +96,8 @@ public class Maze{
     Returns -1 when the maze has no solution.
 
     Postcondition:
-      The S and 'E' remain the same.
+      The 'S' is replaced with '@'
+      The 'E' remain the same
       All visited spots that were not part of the solution are changed to '.'
       All visited spots that are part of the solution are changed to '@'
   */
