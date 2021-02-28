@@ -93,6 +93,7 @@ public class Maze {
         }
       }
     }
+    maze[row][col] = ' '; //start needs to be replaced with '@'
     //return solve(???,???);
     return solve(row, col, 0);
   }
@@ -122,7 +123,8 @@ public class Maze {
     //COMPLETE SOLVE
     if (maze[row][col] == 'E') return count; //if exit is found, solution is the number of @ symbols
     if (maze[row][col] != ' ') return -1; //if there is a wall or marked space, no solution can be found in that direction
-    maze[row][col] = '@';
+    maze[row][col] = '@'; //mark space as part of possible path
+    //if that direction != -1, then this is the solution since reaching the end is the only thing that returns count
     int ans = solve(row, col+1, count+1); //right
     if (ans != -1) {
       return ans;
@@ -139,7 +141,7 @@ public class Maze {
     if (ans != -1) {
       return ans;
     }
-    maze[row][col] = '.';
+    maze[row][col] = '.'; //backtrack: if every direction fails, mark visited spots so space at intersection can pick a new direction
     return -1; //so it compiles
   }
 }
