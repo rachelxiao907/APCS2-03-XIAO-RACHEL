@@ -66,9 +66,7 @@ public class Maze {
       for (int j = 0; j < maze[i].length; j++) {
         output += maze[i][j];
       }
-      if (i != maze.length-1) {
-        output += "\n";
-      }
+      output += "\n";
     }
     return output;
   }
@@ -123,6 +121,7 @@ public class Maze {
     //COMPLETE SOLVE
     if (maze[row][col] == 'E') return count; //if exit is found, solution is the number of @ symbols
     if (maze[row][col] != ' ') return -1; //if there is a wall or marked space, no solution can be found in that direction
+                                          //means we are done with that method and need to backtrack --> go to previous space since current move ended and doesn't work
     maze[row][col] = '@'; //mark space as part of possible path
     //if that direction != -1, then this is the solution since reaching the end is the only thing that returns count
     int ans = solve(row, col+1, count+1); //right
