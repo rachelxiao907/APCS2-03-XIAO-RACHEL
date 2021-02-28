@@ -36,7 +36,7 @@ public class Maze {
     animate = false;
   }
 
-  private void wait(int millis){
+  private void wait(int millis) {
     try {
       Thread.sleep(millis);
     }
@@ -44,11 +44,11 @@ public class Maze {
     }
    }
 
-  public void setAnimate(boolean b){
+  public void setAnimate(boolean b) {
     animate = b;
   }
 
-  public static void clearTerminal(){
+  public static void clearTerminal() {
     //erase terminal
     System.out.println("\033[2J");
   }
@@ -60,7 +60,7 @@ public class Maze {
   /*Return the string that represents the maze.
    It should look like the text file with some characters replaced.
   */
-  public String toString(){
+  public String toString() {
     String output = "";
     for (int i = 0; i < maze.length; i ++) {
       for (int j = 0; j < maze[i].length; j++) {
@@ -77,14 +77,24 @@ public class Maze {
     Note the helper function has the same name, but different parameters.
     Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
   */
-  public int solve(){
-          //only clear the terminal if you are running animation
-          if(animate){
-            clearTerminal();
-          }
-          //start solving at the location of the s.
-          //return solve(???,???);
-          return 0;
+  public int solve() {
+    //only clear the terminal if you are running animation
+    if(animate) {
+      clearTerminal();
+    }
+    //start solving at the location of the s.
+    int row = 0;
+    int col = 0;
+    for (int i = 0; i < maze.length; i++) {
+      for (int j = 0; j < maze[i].length; j++) {
+        if (maze[i][j] == 'S') {
+          row = i;
+          col = j;
+        }
+      }
+    }
+    //return solve(???,???);
+    return solve(row, col);
   }
 
   /*
@@ -101,15 +111,15 @@ public class Maze {
       All visited spots that were not part of the solution are changed to '.'
       All visited spots that are part of the solution are changed to '@'
   */
-  private int solve(int row, int col){ //you can add more parameters since this is private
-      //automatic animation! You are welcome.
-      if(animate){
-          gotoTop();
-          System.out.println(this);
-          wait(50);
-      }
+  private int solve(int row, int col) { //you can add more parameters since this is private
+    //automatic animation! You are welcome.
+    if(animate) {
+      gotoTop();
+      System.out.println(this);
+      wait(50);
+    }
 
-      //COMPLETE SOLVE
-      return -1; //so it compiles
+    //COMPLETE SOLVE
+    return -1; //so it compiles
   }
 }
