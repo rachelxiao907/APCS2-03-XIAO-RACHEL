@@ -94,7 +94,7 @@ public class Maze {
       }
     }
     //return solve(???,???);
-    return solve(row, col);
+    return solve(row, col, 0);
   }
 
   /*
@@ -111,7 +111,7 @@ public class Maze {
       All visited spots that were not part of the solution are changed to '.'
       All visited spots that are part of the solution are changed to '@'
   */
-  private int solve(int row, int col) { //you can add more parameters since this is private
+  private int solve(int row, int col, int count) { //you can add more parameters since this is private
     //automatic animation! You are welcome.
     if(animate) {
       gotoTop();
@@ -120,6 +120,26 @@ public class Maze {
     }
 
     //COMPLETE SOLVE
+    if (maze[row][col] == 'E') return count; //if exit is found, solution is the number of @ symbols
+    if (maze[row][col] != ' ') return -1; //if there is a wall or marked space, no solution can be found in that direction
+    maze[row][col] = '@';
+    int ans = solve(row, col+1, count+1); //right
+    if (ans != -1) {
+      return ans;
+    }
+    ans = solve(row, col-1, count+1); //left
+    if (ans != -1) {
+      return ans;
+    }
+    ans = solve(row-1, col, count+1); //up
+    if (ans != -1) {
+      return ans;
+    }
+    ans = solve(row+1, col, count+1); //down
+    if (ans != -1) {
+      return ans;
+    }
+    maze[row][col] = '.';
     return -1; //so it compiles
   }
 }
