@@ -66,7 +66,9 @@ public class Maze {
       for (int j = 0; j < maze[i].length; j++) {
         output += maze[i][j];
       }
-      output += "\n";
+      if (i != maze.length-1) {
+        output += "\n";
+      }
     }
     return output;
   }
