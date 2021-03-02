@@ -14,7 +14,7 @@ public class MazeGenerator {
     if (maze[startrow-1][startcol] == ' ') neighbors++;
     if (maze[startrow][startcol-1] == ' ') neighbors++;
     if (maze[startrow][startcol+1] == ' ') neighbors++;
-    if (neighbors > 1) return;
+    if (neighbors > 1) return; //require fewer than 2 open neighbors to be deemed safe
 
     maze[startrow][startcol] = ' '; //carve spaces
     ArrayList<Integer> dir = new ArrayList<Integer>();
@@ -24,6 +24,7 @@ public class MazeGenerator {
     dir.add(3);
     Collections.shuffle(dir); //randomize direction
     //recursively carve paths choosing ALL of the 4 neighboring squares, in a random order
+    //this loop ensures that we branch in all directions until there are no more directions to go to
     for (int i = 0; dir.size() > 0; i++) {
       if (dir.get(0) == 0) {
         dir.remove(0);
@@ -39,19 +40,6 @@ public class MazeGenerator {
         generate(maze, rows, cols, startrow+1, startcol); //down
       }
     }
-  }
-
-  public static String toString(char[][] maze) {
-    String output = "";
-    for (int i = 0; i < maze.length; i ++) {
-      for (int j = 0; j < maze[i].length; j++) {
-        output += maze[i][j];
-      }
-      if (i != maze.length-1) {
-        output += "\n";
-      }
-    }
-    return output;
   }
 
 }
