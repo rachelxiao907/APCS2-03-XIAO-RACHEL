@@ -67,5 +67,18 @@ public class Driver{
         System.out.println("Invalid filename: " + filename5);
       }
 
+      String filename6 = "Gen.txt";
+      try {
+        Maze f6;
+        f6 = new Maze(filename6);//true animates the maze.
+
+        f6.setAnimate(true); //comment this if you are using windows cmd/powershell
+        System.out.println(f6.solve() + " steps");
+        System.out.println(f6);
+      }
+      catch(FileNotFoundException e) {
+        System.out.println("Invalid filename: " + filename6);
+      }
+
     }
 }
