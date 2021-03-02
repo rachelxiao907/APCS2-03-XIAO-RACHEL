@@ -16,7 +16,29 @@ public class MazeGenerator {
     if (maze[startrow][startcol+1] == ' ') neighbors++;
     if (neighbors > 1) return;
 
-    maze[startrow][startcol] = ' ';
+    maze[startrow][startcol] = ' '; //carve spaces
+    ArrayList<Integer> dir = new ArrayList<Integer>();
+    dir.add(0);
+    dir.add(1);
+    dir.add(2);
+    dir.add(3);
+    Collections.shuffle(dir); //randomize direction
+    //recursively carve paths choosing ALL of the 4 neighboring squares, in a random order
+    for (int i = 0; dir.size() > 0; i++) {
+      if (dir.get(0) == 0) {
+        dir.remove(0);
+        generate(maze, rows, cols, startrow, startcol+1); //right
+      } else if (dir.get(0) == 1) {
+        dir.remove(0);
+        generate(maze, rows, cols, startrow, startcol-1); //left
+      } else if (dir.get(0) == 2) {
+        dir.remove(0);
+        generate(maze, rows, cols, startrow-1, startcol); //up
+      } else if (dir.get(0) == 3) {
+        dir.remove(0);
+        generate(maze, rows, cols, startrow+1, startcol); //down
+      }
+    }
   }
 
   public static String toString(char[][] maze) {
