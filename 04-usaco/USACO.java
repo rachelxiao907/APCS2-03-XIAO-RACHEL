@@ -18,7 +18,14 @@ public class USACO {
         pasture[i][j] = row.nextInt();
       }
     }
-    stomp(pasture, 0, 0, 3);
+    //Lines R+2..R+N+1: Line i+R+1 describes stomp-digging instruction i with three integers: R_s, C_s, and D_s
+    for (int i = 0; i < N; i++) {
+      line = new Scanner(inf.nextLine());
+      int R_s = line.nextInt() - 1;
+      int C_s = line.nextInt() - 1;
+      int D_s = line.nextInt();
+      stomp(pasture, R_s, C_s, D_s);
+    }
     return pasture[0][0];
   }
 
