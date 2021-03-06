@@ -18,6 +18,7 @@ public class USACO {
         pasture[i][j] = row.nextInt();
       }
     }
+
     //Lines R+2..R+N+1: Line i+R+1 describes stomp-digging instruction i with three integers: R_s, C_s, and D_s
     for (int i = 0; i < N; i++) {
       line = new Scanner(inf.nextLine());
@@ -26,7 +27,17 @@ public class USACO {
       int D_s = line.nextInt();
       stomp(pasture, R_s, C_s, D_s);
     }
-    return pasture[0][0];
+
+    //calculate volume of the new lake in cubic inches
+    int depth = 0; //total depth of lake
+    for (int i = 0; i < R; i++) {
+      for (int j = 0; j < C; j++) {
+        if (pasture[i][j] < E) { //if lower than water level, calculate depth bc higher than water level means there is no water
+          depth += E - pasture[i][j];
+        }
+      }
+    }
+    return depth * 72 * 72;
   }
 
   public static void stomp (int[][] pasture, int r, int c, int d) {
@@ -49,11 +60,5 @@ public class USACO {
   }
 
   //public static long silver(String filename)
-
-  public static void main(String[] args) {
-    try {
-      System.out.println(bronze("lake1.input"));
-    } catch (FileNotFoundException e) {}
-  }
 
 }
