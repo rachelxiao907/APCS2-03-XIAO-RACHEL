@@ -85,6 +85,7 @@ public class USACO {
     int C1 = line.nextInt() - 1;
     int R2 = line.nextInt() - 1;
     int C2 = line.nextInt() - 1;
+    pasture[R1][C1] = 1;
     return 0;
   }
 
