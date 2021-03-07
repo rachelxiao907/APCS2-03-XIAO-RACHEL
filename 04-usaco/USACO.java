@@ -85,8 +85,34 @@ public class USACO {
     int C1 = line.nextInt() - 1;
     int R2 = line.nextInt() - 1;
     int C2 = line.nextInt() - 1;
-    pasture[R1][C1] = 1;
-    return 0;
+
+    pasture[R1][C1] = 1; //set (R1, C1) to 1 to start finding paths
+    for (int i = 0; i < T; i++) {
+      pasture = findPaths(pasture); //continually update the pasture until time runs out
+    }
+    return pasture[R2][C2];
+  }
+
+  public static int[][] findPaths(int[][] pasture)  {
+    int[][] paths = new int[pasture.length][pasture[0].length]; //new array that holds sum of ways to get to each square
+    int[][] moves = {{0,1}, {0,-1}, {1,0}, {-1,0}}; //2D array of moves
+    for (int r = 0; r < pasture.length; r++) {
+      for (int c = 0; c < pasture[r].length; c++) {
+        int sum = 0;
+        //loop to try every direction
+        for (int m = 0; m < moves.length; m++) {
+          if (!notFree(pasture, r, c)) {
+            sum += pasture[r+moves[m][0]][c+moves[m][1]];
+          }
+        }
+        pasture[r][c] = sum;
+      }
+    }
+    return paths;
+  }
+
+  public static boolean notFree(int[][] pasture, int r, int c) {
+    return pasture[r][c] == -1 || r < 0 || c < 0 || r >= pasture.length || c >= pasture[0].length;
   }
 
 }
