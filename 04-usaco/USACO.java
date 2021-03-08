@@ -109,6 +109,7 @@ public class USACO {
               sum += pasture[r + moves[m][0]][c + moves[m][1]]; //sum of the values of neighbors
             }
           }
+          paths[r][c] = sum; //update array with the number of ways to get to the square
         }
       }
     }
@@ -116,7 +117,7 @@ public class USACO {
   }
 
   public static boolean notFree(int[][] pasture, int r, int c) {
-    return pasture[r][c] == -1 || r < 0 || c < 0 || r >= pasture.length || c >= pasture[0].length;
+    return r < 0 || c < 0 || r >= pasture.length || c >= pasture[0].length || pasture[r][c] == -1;
   }
 
 }
