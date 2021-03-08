@@ -74,7 +74,7 @@ public class USACO {
       String s = inf.nextLine();
       for (int j = 0; j < M; j++) {
         if (s.charAt(j) == '*') {
-          pasture[i][j] = -1;
+          pasture[i][j] = -1; //tree at square
         }
       }
     }
@@ -87,13 +87,16 @@ public class USACO {
     int R2 = line.nextInt() - 1;
     int C2 = line.nextInt() - 1;
 
-    pasture[R1][C1] = 1; //set (R1, C1) to 1 to start finding paths
+    pasture[R1][C1] = 1; //set (R1, C1) to 1 to start finding paths by using sums
     for (int i = 0; i < T; i++) {
       pasture = findPaths(pasture); //continually update the pasture until time runs out
+                                    //number of times updated = number of moves/seconds
     }
     return pasture[R2][C2];
   }
 
+  //we need a second 2D array to calculate the number of ways to get to a square
+  //one array would make it hard to update and keep track of adjacent squares
   public static int[][] findPaths(int[][] pasture)  {
     int[][] paths = new int[pasture.length][pasture[0].length]; //new array that holds the sum how many ways each square can be reached
     int[][] moves = {{0,1}, {0,-1}, {1,0}, {-1,0}}; //2D array of moves
