@@ -50,7 +50,7 @@ public class USACO {
       }
     }
     max = max - d; //final elevation after being stomped
-    for (int i = r; i < r + 3; i++) {
+    for (int i = r; i < r + 3; i++) { //loop through 3x3 grid
       for (int j = c; j < c + 3; j++) {
         if (pasture[i][j] > max){
           pasture[i][j] = max; //stomp the square
@@ -58,6 +58,7 @@ public class USACO {
       }
     }
   }
+
 
   public static long silver(String filename) throws FileNotFoundException {
     File f = new File (filename);
@@ -94,18 +95,21 @@ public class USACO {
   }
 
   public static int[][] findPaths(int[][] pasture)  {
-    int[][] paths = new int[pasture.length][pasture[0].length]; //new array that holds sum of ways to get to each square
+    int[][] paths = new int[pasture.length][pasture[0].length]; //new array that holds the sum how many ways each square can be reached
     int[][] moves = {{0,1}, {0,-1}, {1,0}, {-1,0}}; //2D array of moves
     for (int r = 0; r < pasture.length; r++) {
       for (int c = 0; c < pasture[r].length; c++) {
         int sum = 0;
-        //loop to try every direction
-        for (int m = 0; m < moves.length; m++) {
-          if (!notFree(pasture, r, c)) {
-            sum += pasture[r+moves[m][0]][c+moves[m][1]];
+        if (pasture[r][c] == -1) {
+          paths[r][c] = -1; //keep track of the trees in the pasture
+        } else {
+          //loop to try every direction
+          for (int m = 0; m < moves.length; m++) { //check every direction
+            if (!notFree(pasture, r + moves[m][0], c + moves[m][1])) {
+              sum += pasture[r + moves[m][0]][c + moves[m][1]]; //sum of the values of neighbors
+            }
           }
         }
-        pasture[r][c] = sum;
       }
     }
     return paths;
