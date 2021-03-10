@@ -10,6 +10,7 @@ public class Preliminary {
   *@return the index of the final position of the pivot element.
   */
   public static int partition (int [] data, int start, int end) {
+    if (start == end) return start;
     if (data.length <= 1) return start; //fixed out of bounds error
     int index = (int)(Math.random() * (end - start + 1)) + start; //random index from start to end inclusive is chosen
     int pivot = data[index]; //the corresponding element of random is designated to the pivot element
