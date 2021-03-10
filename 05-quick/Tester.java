@@ -15,6 +15,7 @@ public class Tester {
   }
 
   public static void partition(int [] data, int start, int end) {
+    if (data.length <= 1) return start;
     int index = (int)(Math.random() * data.length);
     int pivot = data[index];
     data[index] = data[start];
