@@ -10,8 +10,11 @@ public class Preliminary {
   *@return the index of the final position of the pivot element.
   */
   public static int partition (int [] data, int start, int end) {
+    if (data.length <= 1) return start; //fixed out of bounds error
     int index = (int)(Math.random() * data.length); //select random index for pivot value
     int pivot = data[index]; //the corresponding element of random is designated to the pivot element
+    //System.out.println(index);
+    //System.out.println(data[index]);
     data[index] = data[start]; //swap start value and pivot value
     data[start] = pivot;
     index = start;
@@ -19,7 +22,8 @@ public class Preliminary {
 
     //sorting array according to pivot
     while (start != end) {
-      if (data[start] > pivot) { //if greater than pivot, move to the end (right side)
+      int r = (int)(Math.random() * 2); //assigns r = 0 to right and r = 1 to left
+      if (data[start] > pivot || data[start] == pivot && r == 0) { //if greater than pivot, move to the end (right side)
         int temp = data[start];
         data[start] = data[end]; //swap data[start] and data[end]
         data[end] = temp;
@@ -44,7 +48,7 @@ public class Preliminary {
 
   public static void main(String[] args) {
     int[] data1 = {999,999,999,4,3,2,1,0,999,999,999};
-    System.out.println(partition(data1, 0, data1.length-1));
+    System.out.println(partition(data1, 2, data1.length-1));
   }
 
 }
