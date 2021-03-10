@@ -16,6 +16,7 @@ public class Preliminary {
     data[start] = pivot;
     index = start;
     start++; //increase start by 1 to check other values
+
     //sorting array according to pivot
     while (start != end) {
       if (data[start] > pivot) { //if greater than pivot, move to the end (right side)
@@ -28,38 +29,22 @@ public class Preliminary {
       }
     }
 
+    //figure out where to put the last value (when start == end)
+    if (data[start] < pivot) { //if value is less than pivot, then swap
+      data[index] = data[start]; //swap values
+      data[start] = pivot;
+      index = start; //partition index is the middle index
+    } else { //if value is greater than pivot
+      data[index] = data[start-1]; //move this value to left of pivot by swapping
+      data[start - 1] = pivot; //place pivot to the left of value
+      index = start - 1;
+    }
     return index;
   }
 
   public static void main(String[] args) {
     int[] data1 = {999,999,999,4,3,2,1,0,999,999,999};
-    //System.out.println(partition(data1, 0, data1.length-1));
-
-    int start = 0;
-    int end = data1.length - 1;
-    int index = (int)(Math.random() * data1.length);
-    System.out.println(index);
-    int pivot = data1[index];
-    data1[index] = data1[start];
-    data1[start] = pivot;
-    index = start;
-    start++;
-    while (start != end) {
-      if (data1[start] > pivot) {
-        int temp = data1[start];
-        data1[start] = data1[end];
-        data1[end] = temp;
-        end--;
-      } else {
-        start++;
-      }
-    }
-    System.out.println(index);
-    String output = "";
-    for (int i = 0; i < data1.length; i++) {
-      output += data1[i] + " ";
-    }
-    System.out.println(output + "");
+    System.out.println(partition(data1, 0, data1.length-1));
   }
 
 }
