@@ -4,6 +4,11 @@ public class Tester {
     System.out.println(toString(data1));
     partition(data1, 0, data1.length-1);
     System.out.println(toString(data1));
+
+    int[] data2 = {1,15,27,32,8,5,17,3};
+    System.out.println(toString(data2));
+    partition(data2, 0, data2.length-1);
+    System.out.println(toString(data2));
   }
 
   public static String toString(int[] data) {
@@ -15,9 +20,10 @@ public class Tester {
   }
 
   public static void partition(int [] data, int start, int end) {
-    if (data.length <= 1) return start;
+    if (data.length <= 1) System.out.println(start);
     int index = (int)(Math.random() * data.length);
     int pivot = data[index];
+    System.out.println(pivot);
     data[index] = data[start];
     data[start] = pivot;
     index = start;

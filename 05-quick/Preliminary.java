@@ -13,8 +13,8 @@ public class Preliminary {
     if (data.length <= 1) return start; //fixed out of bounds error
     int index = (int)(Math.random() * data.length); //select random index for pivot value
     int pivot = data[index]; //the corresponding element of random is designated to the pivot element
-    //System.out.println(index);
-    //System.out.println(data[index]);
+    System.out.println(index);
+    System.out.println(data[index]);
     data[index] = data[start]; //swap start value and pivot value
     data[start] = pivot;
     index = start;
@@ -48,7 +48,9 @@ public class Preliminary {
 
   public static void main(String[] args) {
     int[] data1 = {999,999,999,4,3,2,1,0,999,999,999};
-    System.out.println(partition(data1, 2, data1.length-1));
+    System.out.println(partition(data1, 0, data1.length-1));
+    int[] data2 = {1,15,27,32,8,5,17,3};
+    System.out.println(partition(data2, 0, data2.length-1));
   }
 
 }
