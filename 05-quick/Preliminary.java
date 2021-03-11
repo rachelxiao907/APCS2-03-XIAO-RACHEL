@@ -12,7 +12,7 @@ public class Preliminary {
   public static int partition (int [] data, int start, int end) {
     if (data.length <= 1 || start == end) return start; //fixed out of bounds error
 
-    int index = (start + end) / 2 + start; //middle index of subset
+    int index = (start + end) / 2; //middle index of subset
     //when choosing a pivot, use the median value of the lo, hi, and middle elements
     if (data[end] >= data[start] && data[start] >= data[index] || data[end] <= data[start] && data[start] <= data[index]) {
       index = start; //if start value is the median, make index of pivot start
