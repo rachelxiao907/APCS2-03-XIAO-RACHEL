@@ -7,10 +7,10 @@ public class Quick {
   *4. Only the indices from start to end inclusive are considered in range
   *@return the index of the final position of the pivot element.
   */
-  public static int partition (int [] data, int start, int end) {
-    if (data.length <= 1 || start == end) return start; //fixed out of bounds error
+  public static int partition (int[] data, int start, int end) {
+    if (start == end || data.length <= 1) return start; //fixed out of bounds error
 
-    int index = (start + end) / 2 + start; //middle index of subset
+    int index = (start + end) / 2; //middle index of subset
     //when choosing a pivot, use the median value of the lo, hi, and middle elements
     if (data[end] >= data[start] && data[start] >= data[index] || data[end] <= data[start] && data[start] <= data[index]) {
       index = start; //if start value is the median, make index of pivot start
@@ -50,6 +50,27 @@ public class Quick {
       index = start - 1;
     }
     return index;
+  }
+
+  /*return the value that is the kth smallest value of the array.
+  *@param data must have a length > 0
+  *@param k is 0 to data.length-1 inclusive
+  *@postcondition The array can be modified. (If we did not want to modify the array, we could make a copy before we start the process)
+  */
+  public static int quickselect(int[] data, int k) {
+    int start = 0;
+    int end = data.length - 1;
+    int pivot = partition(data, start, end);
+    while (pivot != k) { //when you partition, compare the pivot index to the index you want
+      //partition the "half" of the sub-array that contains the index you want
+      if (k < pivot) { //if k is less than pivot, partition the left side
+        end = pivot - 1;
+      } else if (k > pivot) { //if k is greater than pivot, partition the right side
+        start = pivot + 1;
+      }
+      pivot = partition(data, start, end);
+    }
+    return data[k];
   }
 
 }
