@@ -74,7 +74,11 @@ public class Quick {
   }
 
   public static void quicksort(int[] data, int start, int end) {
-    int pivot = partition(data, start, end);
+    if (start < end) {
+      int pivot = partition(data, start, end);
+      quicksort(data, start, pivot-1); //partition left half of sub-array
+      quicksort(data, pivot+1, end); //partition right half of sub-array
+    }
   }
 
 }
