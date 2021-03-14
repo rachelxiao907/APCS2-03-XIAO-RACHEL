@@ -9,17 +9,10 @@ public class Preliminary {
   *4. Only the indices from start to end inclusive are considered in range
   *@return the index of the final position of the pivot element.
   */
-  public static int partition (int [] data, int start, int end) {
-    if (data.length <= 1 || start == end) return start; //fixed out of bounds error
+  public static int partition (int[] data, int start, int end) {
+    if (start == end || data.length <= 1) return start; //fixed out of bounds error
 
-    int index = (start + end) / 2; //middle index of subset
-    //when choosing a pivot, use the median value of the lo, hi, and middle elements
-    if (data[end] >= data[start] && data[start] >= data[index] || data[end] <= data[start] && data[start] <= data[index]) {
-      index = start; //if start value is the median, make index of pivot start
-    } else if (data[start] >= data[end] && data[end] >= data[index] || data[start] <= data[end] && data[end] <= data[index]) {
-      index = end; //if start value is the median, make index of pivot end
-    }
-
+    int index = (int)(Math.random() * (end - start + 1)) + start; //when choosing a pivot, use a random index
     int pivot = data[index]; //the corresponding element of median index is designated to the pivot element
     //System.out.println(index); //debugging
     //System.out.println(pivot);
@@ -30,6 +23,7 @@ public class Preliminary {
 
     //sorting array according to pivot
     while (start != end) {
+      //when a data element is equal to the pivot, make a 50% chance that you swap it to the other side
       int r = (int)(Math.random() * 2); //assigns r = 0 to right and r = 1 to left
       if (data[start] > pivot || (data[start] == pivot && r == 0)) { //if greater than pivot, move to the end (right side)
         int temp = data[start];
