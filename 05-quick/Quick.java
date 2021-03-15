@@ -21,17 +21,17 @@ public class Quick {
     index = start;
     start++; //increase start by 1 to check other values
 
+    boolean left = true;
     //sorting array according to pivot
     while (start != end) {
       //when a data element is equal to the pivot, make a 50% chance that you swap it to the other side
-      boolean left = true;
+      if (data[start] == pivot) left = !left;
       if (data[start] > pivot || (data[start] == pivot && left)) { //if greater than pivot, move to the end (right side)
         int temp = data[start];
         data[start] = data[end]; //swap data[start] and data[end]
         data[end] = temp;
         end--; //shorten middle section
-        left = false;
-      } else if (data[start] < pivot) { //if less than pivot, leave value on left side
+      } else { //if less than pivot, leave value on left side
         start++; //shorten middle section
       }
     }
