@@ -21,11 +21,12 @@ public class Preliminary {
     index = start;
     start++; //increase start by 1 to check other values
 
+    boolean left = true;
     //sorting array according to pivot
     while (start != end) {
       //when a data element is equal to the pivot, make a 50% chance that you swap it to the other side
-      int r = (int)(Math.random() * 2); //assigns r = 0 to right and r = 1 to left
-      if (data[start] > pivot || (data[start] == pivot && r == 0)) { //if greater than pivot, move to the end (right side)
+      if (data[start] == pivot) left = !left; //every time you see an equal value negate the boolean
+      if (data[start] > pivot || (data[start] == pivot && left)) { //if greater than pivot, move to the end (right side)
         int temp = data[start];
         data[start] = data[end]; //swap data[start] and data[end]
         data[end] = temp;
