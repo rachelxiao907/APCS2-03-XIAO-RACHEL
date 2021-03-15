@@ -13,6 +13,11 @@ public class Tester {
     System.out.println(Quick.partition(data2, 0, data2.length-1));
     System.out.println(toString(data2));
 
+    int[] data3 = {7,7,2,1,0,9,2,7,4,5,2,7,8};
+    System.out.println(toString(data3));
+    System.out.println(Quick.partition(data3, 0, data3.length-1));
+    System.out.println(toString(data3));
+
     System.out.println("\n----------Testing quickselect----------\n");
     int[] ary  = {2, 10, 15, 23, 0,  5};
     //If sorted: {0,  2,  5, 10, 15, 23}
@@ -27,43 +32,68 @@ public class Tester {
     System.out.println(toString(ary));
 
     //sorted array
-    int size = 1000000;
+    int size = 10000000;
     int[] arr = new int[size];
+    int[] check = new int[size];
     for (int i = 0; i < size; i++) {
       arr[i] = i;
+      check[i] = arr[i];
     }
     //System.out.println(Quick.quickselect(arr, 53290));
 
     //array with one value
     int[] arr1 = new int[size];
+    int[] check1 = new int[size];
     for (int i = 0; i < size; i++) {
       arr1[i] = 2;
+      check1[i] = 2;
     }
 
-    //array with 1s and 0s
+    //array with random values
     int[] arr2 = new int[size];
+    int[] check2 = new int[size];
     for (int i = 0; i < size; i++) {
-      int r = (int)(Math.random() * 2);
-      if (r == 0) arr2[i] = 0;
-      else arr2[i] = 1;
+      int r = (int)(Math.random() * size);
+      arr2[i] = r;
+      check2[i] = arr2[i];
     }
     //System.out.println(Quick.quickselect(arr2, 999999));
 
-    //array with random values
+    //array with 1s and 0s
     int[] arr3 = new int[size];
+    int[] check3 = new int[size];
     for (int i = 0; i < size; i++) {
-      arr3[i] = (int)(Math.random() * 10);
+      int r = (int)(Math.random() * 2);
+      if (r == 0) arr3[i] = 0;
+      else arr3[i] = 1;
+      check3[i] = arr3[i];
     }
     //System.out.println(Quick.quickselect(arr3, 999999));
 
     //reverse sorted array
     int[] arr4 = new int[size];
+    int[] check4 = new int[size];
     for (int i = 0; i < size; i++) {
       arr4[i] = size - i;
+      check4[i] = arr4[i];
     }
     //System.out.println(Quick.quickselect(arr4, 73989));
 
     System.out.println("\n----------Testing quicksort----------\n");
+    long t1 = System.currentTimeMillis();
+    Quick.quicksort(arr3);
+    long t2 = System.currentTimeMillis();
+    System.out.println(t2 - t1);
+
+    long c1 = System.currentTimeMillis();
+    Arrays.sort(check3);
+    long c2 = System.currentTimeMillis();
+    System.out.println(c2 - c1);
+    if (Arrays.equals(arr3, check3)) {
+      System.out.println("WOOHOO");
+    } else {
+      System.out.println("FAILED");
+    }
   }
 
   public static String toString(int[] data) {
