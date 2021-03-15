@@ -10,10 +10,10 @@ public class Quick {
   *@return the index of the final position of the pivot element.
   */
   public static int partition (int[] data, int start, int end) {
-    if (start == end || data.length <= 1) return start; //fixed out of bounds error
+    if (start == end) return start; //fixed out of bounds error
 
     int index = (int)(Math.random() * (end - start + 1)) + start; //when choosing a pivot, use a random index
-    int pivot = data[index]; //the corresponding element of median index is designated to the pivot element
+    int pivot = data[index]; //the corresponding element of random index is designated to the pivot element
     //System.out.println(index); //debugging
     //System.out.println(pivot);
     data[index] = data[start]; //swap start value and pivot value
@@ -24,13 +24,14 @@ public class Quick {
     //sorting array according to pivot
     while (start != end) {
       //when a data element is equal to the pivot, make a 50% chance that you swap it to the other side
-      int r = (int)(Math.random() * 2); //assigns r = 0 to right and r = 1 to left
-      if (data[start] > pivot || (data[start] == pivot && r == 0)) { //if greater than pivot, move to the end (right side)
+      boolean left = true;
+      if (data[start] > pivot || (data[start] == pivot && left)) { //if greater than pivot, move to the end (right side)
         int temp = data[start];
         data[start] = data[end]; //swap data[start] and data[end]
         data[end] = temp;
         end--; //shorten middle section
-      } else { //if less than pivot, leave value on left side
+        left = false;
+      } else if (data[start] < pivot) { //if less than pivot, leave value on left side
         start++; //shorten middle section
       }
     }
