@@ -1,6 +1,10 @@
 import java.util.*;
 public class Merge {
   public static void mergesort(int[] data) {
+    int[] temp = new int[data.length]; //pre-allocate a temp array
+    for (int i = 0; i < data.length; i++) {
+      temp[i] = data[i];
+    }
     mergesortH(data, 0, data.length-1);
   }
 
@@ -59,9 +63,21 @@ public class Merge {
     }
   }
 
+  private static void mergesort(int[] data, int[] temp, int lo, int hi) {
+    if (lo < hi) { //if more than one element
+      int mid = (hi - lo) / 2 + lo; //middle point of array/subarray
+      System.out.println(mid);
+
+      mergesort(data, temp, lo, mid); //mergesort left side
+      mergesort(data, temp, mid+1, hi); //mergesort right side
+    }
+  }
+
   public static void main(String[] args) {
     int[] data = new int[] {38,27,43,3,9,82,10};
     mergesortH(data, 0, data.length-1);
+    // int[] temp = data;
+    // mergesort(data, temp, 0, data.length-1);
     System.out.println(Arrays.toString(data));
 
     int size = 1000000;
