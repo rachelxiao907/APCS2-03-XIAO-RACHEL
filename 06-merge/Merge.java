@@ -1,10 +1,6 @@
 import java.util.*;
 public class Merge {
   public static void mergesort(int[] data) {
-    int[] temp = new int[data.length]; //pre-allocate a temp array
-    for (int i = 0; i < data.length; i++) {
-      temp[i] = data[i];
-    }
     mergesortH(data, 0, data.length-1);
   }
 
@@ -39,7 +35,7 @@ public class Merge {
 
   public static void merge(int[] data, int[] left, int[] right) {
     int l = 0, r = 0, m = 0; //indices of subarrays (left, right, merge)
-    while (l < left.length && r < right.length) { //comapre corresponding values of left and right subarrays
+    while (l < left.length && r < right.length) { //compare top/most recent values of left and right subarrays
       if (left[l] <= right[r]) { //if left value is less than right value
         data[m] = left[l];
         l++; //increase left index
@@ -63,31 +59,57 @@ public class Merge {
     }
   }
 
-  private static void mergesort(int[] data, int[] temp, int lo, int hi) {
-    if (lo < hi) { //if more than one element
-      int mid = (hi - lo) / 2 + lo; //middle point of array/subarray
-      System.out.println(mid);
-
-      mergesort(data, temp, lo, mid); //mergesort left side
-      mergesort(data, temp, mid+1, hi); //mergesort right side
-    }
-  }
-
   public static void main(String[] args) {
     int[] data = new int[] {38,27,43,3,9,82,10};
-    mergesortH(data, 0, data.length-1);
-    // int[] temp = data;
-    // mergesort(data, temp, 0, data.length-1);
+    mergesort(data);
     System.out.println(Arrays.toString(data));
 
-    int size = 1000000;
-    int max = size;
-    int[] data1 = new int[size];
-    int[] data2 = new int[size];
-    for(int i = 0; i < data1.length; i++) {
-      data1[i] = (int)(Math.random()*max);
-      data2[i] = data1[i];
+    //sorted array
+    int size = 10000000;
+    int[] arr = new int[size];
+    int[] check = new int[size];
+    for (int i = 0; i < size; i++) {
+      arr[i] = i;
+      check[i] = arr[i];
     }
+
+    //array with one value
+    int[] arr1 = new int[size];
+    int[] check1 = new int[size];
+    for (int i = 0; i < size; i++) {
+      arr1[i] = 2;
+      check1[i] = 2;
+    }
+
+    //array with random values
+    int[] arr2 = new int[size];
+    int[] check2 = new int[size];
+    for (int i = 0; i < size; i++) {
+      int r = (int)(Math.random() * size);
+      arr2[i] = r;
+      check2[i] = arr2[i];
+    }
+
+    //array with 1s and 0s
+    int[] arr3 = new int[size];
+    int[] check3 = new int[size];
+    for (int i = 0; i < size; i++) {
+      int r = (int)(Math.random() * 2);
+      if (r == 0) arr3[i] = 0;
+      else arr3[i] = 1;
+      check3[i] = arr3[i];
+    }
+
+    //reverse sorted array
+    int[] arr4 = new int[size];
+    int[] check4 = new int[size];
+    for (int i = 0; i < size; i++) {
+      arr4[i] = size - i;
+      check4[i] = arr4[i];
+    }
+
+    int[] data1 = arr2;
+    int[] data2 = check2;
 
     long t1, t2, mtime, stime;
     t1 = System.currentTimeMillis();
@@ -99,7 +121,12 @@ public class Merge {
     t2 = System.currentTimeMillis();
     stime = t2 - t1;
     System.out.println("Merge: " + mtime + "\nArray.Sort: " + stime);
-
+    System.out.println("Ratio: " + (double)mtime/stime);
+    if(!Arrays.equals(data1, data2)){
+      System.out.println("FAILED!");
+    } else {
+      System.out.println("WOOHOO!");
+    }
   }
 
 }
