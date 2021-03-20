@@ -72,6 +72,21 @@ public class MyDeque<E>{
     size++;
   }
 
+  public E removeFirst() {
+    if (size == 0) throw new NoSuchElementException(); //if deque is empty
+    E removed = data[start]; //removed element
+    data[start] = null;
+    if (size != 1) { //if size is 1, start stays the same because there is no element to the right of it
+      if (start == data.length - 1) { //if start is at the end of the array, loop back to the front
+        start = 0;
+      } else {
+        start++; //increase start to the right of front
+      }
+    }
+    size--;
+    return removed;
+  }
+
   public static void main(String[] args) {
     MyDeque <Integer> d = new MyDeque<Integer>();
     d.addFirst(1);
@@ -81,6 +96,8 @@ public class MyDeque<E>{
     d.addLast(3);
     System.out.println(d);
     d.addLast(4);
+    System.out.println(d);
+    System.out.println(d.removeFirst());
     System.out.println(d);
   }
 
