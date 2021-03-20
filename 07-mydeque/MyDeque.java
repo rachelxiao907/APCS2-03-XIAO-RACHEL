@@ -104,6 +104,16 @@ public class MyDeque<E>{
     return removed;
   }
 
+  public E getFirst() {
+    if (size == 0) throw new NoSuchElementException(); //if deque is empty
+    return data[start];
+  }
+
+  public E getLast() {
+    if (size == 0) throw new NoSuchElementException(); //if deque is empty
+    return data[end];
+  }
+
   public static void main(String[] args) {
     MyDeque <Integer> d = new MyDeque<Integer>();
     d.addFirst(1);
