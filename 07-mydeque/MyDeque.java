@@ -18,19 +18,27 @@ public class MyDeque<E>{
 
   public String toString() {
     String output = "{";
-    for (int i = start; i < size; i++) {
-      output += data[i];
+    int index = start;
+    for (int i = 0; i < size; i++) {
+      output += data[index % data.length]; //add element at index modded by data.length
       if (i != size - 1) output += ", ";
+      index++; //increase index
     }
     return output + "}";
   }
 
-  public void addFirst(E element){ }
-  public void addLast(E element){ }
-  public E removeFirst(){ }
-  public E removeLast(){ }
-  public E getFirst(){ }
-  public E getLast(){ }
+  @SuppressWarnings("unchecked")
+  private void resize() {
+    E[] arr = (E[]) new Object[data.length * 2 + 1]; //create a bigger and new array
+    int index = start;
+    for (int i = 0; i < size; i++) {
+      arr[i] = data[index % data.length];
+      index++; //increase index
+    }
+    data = arr;
+    start = 0; //set start to zero
+    end = size - 1; //set end to size-1
+  }
 
   public static void main(String[] args) {
     MyDeque <Integer> d = new MyDeque<Integer>();
