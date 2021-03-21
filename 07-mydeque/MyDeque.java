@@ -39,12 +39,15 @@ public class MyDeque<E>{
     }
     data = arr;
     start = 0; //set start to zero
-    end = size - 1; //set end to size-1
+    if (size != 0) end = size - 1; //set end to size-1
   }
 
   public void addFirst(E element) {
     if (element == null) throw new NullPointerException(); //if the specified element is null
-    if (size == data.length) resize(); //if the array is filled with elements
+    if (size == data.length) { //if the array is filled with elements
+      resize();
+      //System.out.println("resized!"); //debugging
+    }
     if (size != 0) { //if size is zero, start doesn't need to be changed
       if (start == 0) { //if start is zero, front moves to the back of array
         start = data.length - 1; //loop around the back
@@ -59,7 +62,10 @@ public class MyDeque<E>{
 
   public void addLast(E element) {
     if (element == null) throw new NullPointerException(); //if the specified element is null
-    if (size == data.length) resize(); //if the array is filled with elements
+    if (size == data.length) { //if the array is filled with elements
+      resize();
+      //System.out.println("resized!"); //debugging
+    }
     if (size != 0) { //if size is zero, end doesn't need to be changed
       if (end == data.length - 1) { //if end is the last index, back moves to the front of array
         end = 0; //loop around the front
@@ -128,6 +134,10 @@ public class MyDeque<E>{
     System.out.println(d);
     System.out.println(d.removeLast());
     System.out.println(d);
+    System.out.println();
+    MyDeque <Integer> d1 = new MyDeque<Integer>(0);
+    d1.addLast(2);
+    System.out.println(d1);
   }
 
 }
