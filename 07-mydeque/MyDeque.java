@@ -34,12 +34,14 @@ public class MyDeque<E>{
     E[] arr = (E[]) new Object[data.length * 2 + 1]; //create a bigger and new array
     int index = start;
     for (int i = 0; i < size; i++) { //loop through all elements
-      arr[i] = data[index % data.length];
+      arr[i] = data[index % data.length]; //copy array
       index++; //increase index
     }
     data = arr;
     start = 0; //set start to zero
-    if (size != 0) end = size - 1; //set end to size-1
+    if (size != 0) { //end is 0 if there are no elements
+      end = size - 1; //set end to size-1
+    }
   }
 
   public void addFirst(E element) {
@@ -56,7 +58,7 @@ public class MyDeque<E>{
       }
     }
     //System.out.println(start); //debugging
-    data[start] = element;
+    data[start] = element; //add element
     size++;
   }
 
@@ -74,14 +76,14 @@ public class MyDeque<E>{
       }
     }
     //System.out.println(end); //debugging
-    data[end] = element;
+    data[end] = element; //add element
     size++;
   }
 
   public E removeFirst() {
     if (size == 0) throw new NoSuchElementException(); //if deque is empty
     E removed = data[start]; //removed element
-    data[start] = null;
+    data[start] = null; //delete element
     if (size != 1) { //if size is 1, start stays the same because there is no element to the right of it
       if (start == data.length - 1) { //if start is at the end of the array, loop to the front
         start = 0;
@@ -97,7 +99,7 @@ public class MyDeque<E>{
   public E removeLast() {
     if (size == 0) throw new NoSuchElementException(); //if deque is empty
     E removed = data[end]; //removed element
-    data[end] = null;
+    data[end] = null; //delete element
     if (size != 1) { //if size is 1, end stays the same because there is no element to the left of it
       if (end == 0) { //if end is at the front of the array, loop to the back
         end = data.length - 1;
@@ -118,26 +120,6 @@ public class MyDeque<E>{
   public E getLast() {
     if (size == 0) throw new NoSuchElementException(); //if deque is empty
     return data[end];
-  }
-
-  public static void main(String[] args) {
-    MyDeque <Integer> d = new MyDeque<Integer>();
-    d.addFirst(1);
-    System.out.println(d);
-    d.addFirst(2);
-    System.out.println(d);
-    d.addLast(3);
-    System.out.println(d);
-    d.addLast(4);
-    System.out.println(d);
-    System.out.println(d.removeFirst());
-    System.out.println(d);
-    System.out.println(d.removeLast());
-    System.out.println(d);
-    System.out.println();
-    MyDeque <Integer> d1 = new MyDeque<Integer>(0);
-    d1.addLast(2);
-    System.out.println(d1);
   }
 
 }
