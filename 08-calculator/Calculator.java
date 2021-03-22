@@ -9,6 +9,9 @@ public class Calculator {
   *        Use the string parameter of your exception to indicate what happened.
   */
   public static double eval(String s) {
+    if (s.length() == 0) {
+      throw new IllegalArgumentException();
+    }
     String[] expression = s.split(" "); //convert your string into tokens (a list of values and operators)
     ArrayDeque<Double> stack = new ArrayDeque<Double>(); //use a Deque to store your values and act as the stack
 
@@ -55,6 +58,12 @@ public class Calculator {
     System.out.println(eval("5 7 + 6 2 - *")); //48.0
     System.out.println(eval("4 5 7 2 + - *")); //-16.0
     System.out.println(eval("3 4 + 2 * 7 /")); //2.0
+    System.out.println(eval("-3 -6 +")); //-9.0
+    try {
+      System.out.println(eval(""));
+    } catch (IllegalArgumentException e) {
+      System.out.println("woo");
+    }
   }
 
 }
