@@ -16,13 +16,13 @@ public class Calculator {
       //System.out.println(token); //test your tokens by printing each one!
       //instead of printing each one, decide what you should do with them and the stack (operators are never stored)
       if (token.equals("+")) { //addition
-
+        stack.addFirst(stack.removeFirst() + stack.removeFirst()); //remove first two values and replace them with the solution
       } else if (token.equals("-")) { //subtraction
-
+        stack.addFirst(stack.removeFirst() - stack.removeFirst());
       } else if (token.equals("/")) { //division
-
+        stack.addFirst(stack.removeFirst() / stack.removeFirst());
       } else if (token.equals("*")) { //multiplication
-
+        stack.addFirst(stack.removeFirst() * stack.removeFirst());
       } else if (token.equals("%")) { //modulo
 
       } else { //if token is a number and not an operator
@@ -34,7 +34,10 @@ public class Calculator {
   }
 
   public static void main(String[] args) {
-    System.out.println(eval("11 3 - 4 + 2.5 *"));
+    System.out.println(eval("11 3 - 4 + 2.5 *")); //30.0
+    System.out.println(eval("10 2.0 +")); //12.0
+    System.out.println(eval("8 2 + 99 9 - * 2 + 9 -")); //893.0
+    System.out.println(eval("1 2 3 4 5 + * - -")); //26.0
   }
 
 }
