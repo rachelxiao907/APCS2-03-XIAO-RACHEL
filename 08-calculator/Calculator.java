@@ -17,15 +17,26 @@ public class Calculator {
       //instead of printing each one, decide what you should do with them and the stack (operators are never stored)
       if (token.equals("+")) { //addition
         stack.addFirst(stack.removeFirst() + stack.removeFirst()); //remove first two values and replace them with the solution
-      } else if (token.equals("-")) { //subtraction
-        stack.addFirst(stack.removeFirst() - stack.removeFirst());
-      } else if (token.equals("/")) { //division
-        stack.addFirst(stack.removeFirst() / stack.removeFirst());
-      } else if (token.equals("*")) { //multiplication
-        stack.addFirst(stack.removeFirst() * stack.removeFirst());
-      } else if (token.equals("%")) { //modulo
-
-      } else { //if token is a number and not an operator
+      }
+      else if (token.equals("-")) { //subtraction
+        double second = stack.removeFirst();
+        double first = stack.removeFirst();
+        stack.addFirst(first - second); //evaluate left to right
+      }
+      else if (token.equals("/")) { //division
+        double second = stack.removeFirst();
+        double first = stack.removeFirst();
+        stack.addFirst(first / second);
+      }
+      else if (token.equals("*")) { //multiplication
+        stack.addFirst(stack.removeFirst() * stack.removeFirst()); //communitive property
+      }
+      else if (token.equals("%")) { //modulo
+        double second = stack.removeFirst();
+        double first = stack.removeFirst();
+        stack.addFirst(first % second);
+      }
+      else { //if token is a number and not an operator
         stack.addFirst(Double.parseDouble(token)); //add number to top of stack
       }
     }
