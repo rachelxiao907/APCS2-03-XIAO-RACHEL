@@ -49,6 +49,12 @@ public class Calculator {
     System.out.println(eval("10 2.0 +")); //12.0
     System.out.println(eval("8 2 + 99 9 - * 2 + 9 -")); //893.0
     System.out.println(eval("1 2 3 4 5 + * - -")); //26.0
+    System.out.println(eval("5 9 + 2 * 6 5 * +")); //58.0
+    System.out.println(eval("32 17 -")); //15.0
+    System.out.println(eval("4 2 + 3 5 1 - * +")); //18.0
+    System.out.println(eval("5 7 + 6 2 - *")); //48.0
+    System.out.println(eval("4 5 7 2 + - *")); //-16.0
+    System.out.println(eval("3 4 + 2 * 7 /")); //2.0
   }
 
 }
