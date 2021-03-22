@@ -80,16 +80,21 @@ public class Tester {
     //System.out.println(Quick.quickselect(arr4, 73989));
 
     System.out.println("\n----------Testing quicksort----------\n");
+    int[] a = arr3;
     long t1 = System.currentTimeMillis();
-    Quick.quicksort(arr3);
+    Quick.quicksort(a);
     long t2 = System.currentTimeMillis();
-    System.out.println(t2 - t1);
+    long q = t2 - t1;
+    System.out.println(q);
 
+    int[] c = check3;
     long c1 = System.currentTimeMillis();
-    Arrays.sort(check3);
+    Arrays.sort(c);
     long c2 = System.currentTimeMillis();
-    System.out.println(c2 - c1);
-    if (Arrays.equals(arr3, check3)) {
+    long s = c2 - c1;
+    System.out.println(s);
+    System.out.println((double)q/s);
+    if (Arrays.equals(a, c)) {
       System.out.println("WOOHOO");
     } else {
       System.out.println("FAILED");
