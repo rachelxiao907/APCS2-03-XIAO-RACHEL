@@ -19,22 +19,27 @@ public class Calculator {
       //System.out.println(token); //test your tokens by printing each one!
       //instead of printing each one, decide what you should do with them and the stack (operators are never stored)
       if (token.equals("+")) { //addition
+        if (stack.size() < 2) throw new IllegalArgumentException("too few operands"); //all operators are binary
         stack.addFirst(stack.removeFirst() + stack.removeFirst()); //remove first two values and replace them with the solution
       }
       else if (token.equals("-")) { //subtraction
+        if (stack.size() < 2) throw new IllegalArgumentException("too few operands");
         double second = stack.removeFirst();
         double first = stack.removeFirst();
         stack.addFirst(first - second); //evaluate left to right
       }
       else if (token.equals("/")) { //division
+        if (stack.size() < 2) throw new IllegalArgumentException("too few operands");
         double second = stack.removeFirst();
         double first = stack.removeFirst();
         stack.addFirst(first / second);
       }
       else if (token.equals("*")) { //multiplication
+        if (stack.size() < 2) throw new IllegalArgumentException("too few operands");
         stack.addFirst(stack.removeFirst() * stack.removeFirst()); //communitive property
       }
       else if (token.equals("%")) { //modulo
+        if (stack.size() < 2) throw new IllegalArgumentException("too few operands");
         double second = stack.removeFirst();
         double first = stack.removeFirst();
         stack.addFirst(first % second);
@@ -43,7 +48,9 @@ public class Calculator {
         stack.addFirst(Double.parseDouble(token)); //add number to top of stack
       }
     }
-    //System.out.println(stack); //testing tokens
+    if (stack.size() != 1) { //if there is more than one value in the stack, there are too many operands as the only value left should be the solution
+      throw new IllegalArgumentException("too many operands");
+    }
     return stack.getFirst(); //return solution
   }
 
@@ -63,6 +70,16 @@ public class Calculator {
       System.out.println(eval(""));
     } catch (IllegalArgumentException e) {
       System.out.println("woo");
+    }
+    try {
+      System.out.println(eval("5 3 7 9 + +")); //too many operands
+    } catch (IllegalArgumentException e) {
+      System.out.println("woo too much");
+    }
+    try {
+      System.out.println(eval("4 2 3 5 1 - + * + *")); //not enough operands
+    } catch (IllegalArgumentException e) {
+      System.out.println("woo too little");
     }
   }
 
