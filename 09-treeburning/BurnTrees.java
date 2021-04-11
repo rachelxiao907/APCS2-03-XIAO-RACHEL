@@ -52,6 +52,21 @@ public class BurnTrees{
   public void tick(){
     ticks++;
     //YOU MUST IMPLEMENT THIS
+    int[][] moves = {{0,1}, {0,-1}, {1,0}, {-1,0}}; //directions
+    for (int r = 0; r < map.length; r++) {
+      for (int c = 0; c < map[r].length; c++) {
+        if (map[r][c] == FIRE) {  //existing fires spread new fires
+          for (int m = 0; m < moves.length; m++) {  //a fire will spread to all trees directly adjacent to the fire (not diagonal)
+            int i = r + moves[m][0];
+            int j = c + moves[m][1];
+            if (i >= 0 && j >= 0 && i < map.length && j < map[0].length && map[i][j] == TREE) {  //if in bounds and is a tree
+              map[i][j] = FIRE;  //new fire
+            }
+          }
+          map[r][c] = ASH;  //existing fires turn to ash after spreading
+        }
+      }
+    }
   }
 
   /*
