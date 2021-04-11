@@ -32,10 +32,16 @@ public class BurnTrees{
   }
 
   /*Determine if the simulation is still burning
-   *@return true if any fires are still burning, false otherwise
+   *@return false if any fires are still burning, true otherwise
    */
   public boolean done(){
     //YOU MUST IMPLEMENT THIS
+    for (int r = 0; r < map.length; r++) {
+      for (int c = 0; c < map[r].length; c++) {
+        if (map[r][c] == FIRE) return false;  //not done if fires are still burning
+      }
+    }
+    return true;  //done if no fires are burning
   }
 
 
