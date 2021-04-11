@@ -60,10 +60,19 @@ public class BurnTrees{
             int i = r + moves[m][0];
             int j = c + moves[m][1];
             if (i >= 0 && j >= 0 && i < map.length && j < map[0].length && map[i][j] == TREE) {  //if in bounds and is a tree
-              map[i][j] = FIRE;  //new fire
+              map[i][j] = -1;  //new fire (placeholder)
             }
           }
           map[r][c] = ASH;  //existing fires turn to ash after spreading
+        }
+      }
+    }
+
+    //a tree that just turned into fire will not spread until the next round
+    for (int r = 0; r < map.length; r++) {
+      for (int c = 0; c < map[r].length; c++) {
+        if (map[r][c] == -1) {
+          map[r][c] = FIRE;
         }
       }
     }
