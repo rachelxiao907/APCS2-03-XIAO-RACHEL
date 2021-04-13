@@ -38,12 +38,13 @@ public class BurnTrees{
    */
   public boolean done(){
     //YOU MUST IMPLEMENT THIS
-    for (int r = 0; r < map.length; r++) {
-      for (int c = 0; c < map[r].length; c++) {
-        if (map[r][c] == FIRE) return false; //not done if fires are still burning
-      }
-    }
-    return true; //done if no fires are burning
+    // for (int r = 0; r < map.length; r++) {
+    //   for (int c = 0; c < map[r].length; c++) {
+    //     if (map[r][c] == FIRE) return false; //not done if fires are still burning
+    //   }
+    // }
+    // return true; //done if no fires are burning
+    return frontier.size() == 0;
   }
 
 
