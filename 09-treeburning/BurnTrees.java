@@ -2,6 +2,7 @@ import java.util.*;
 public class BurnTrees{
   private int[][]map;
   private int ticks;
+  private Frontier frontier;
   private static int TREE = 2;
   private static int FIRE = 1;
   private static int ASH = 3;
@@ -24,6 +25,7 @@ public class BurnTrees{
    */
   public BurnTrees(int width,int height, double density){
     map = new int[height][width];
+    frontier = new Frontier(); //adding a Frontier to the stimulation
     for(int r=0; r<map.length; r++ )
       for(int c=0; c<map[r].length; c++ )
         if(Math.random() < density)
@@ -38,10 +40,10 @@ public class BurnTrees{
     //YOU MUST IMPLEMENT THIS
     for (int r = 0; r < map.length; r++) {
       for (int c = 0; c < map[r].length; c++) {
-        if (map[r][c] == FIRE) return false;  //not done if fires are still burning
+        if (map[r][c] == FIRE) return false; //not done if fires are still burning
       }
     }
-    return true;  //done if no fires are burning
+    return true; //done if no fires are burning
   }
 
 
@@ -85,8 +87,10 @@ public class BurnTrees{
     //If you add more instance variables you can add more here,
     //otherwise it is complete.
     for(int i = 0; i < map.length; i++){
+      int[] arr = {i , 0};
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
+        frontier.add(arr);
       }
     }
   }
