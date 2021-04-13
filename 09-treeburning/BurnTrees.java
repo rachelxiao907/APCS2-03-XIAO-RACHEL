@@ -55,6 +55,23 @@ public class BurnTrees{
     ticks++;
     //YOU MUST IMPLEMENT THIS
     int[][] moves = {{0,1}, {0,-1}, {1,0}, {-1,0}}; //directions
+    int size = frontier.size(); //only process the original FIRE, so check the size before you start removing elements
+    for (int f = 0; f < size; f++) { //only check the positions that are already on fire
+      int[] coor = frontier.remove(); //remove each position from the frontier
+      int r = coor[0];
+      int c = coor[1];
+      map[r][c] = ASH; //turn that position into ASH
+      for (int m = 0; m < moves.length; m++) { //spread FIRE
+        int i = r + moves[m][0];
+        int j = c + moves[m][1];
+        if (i >= 0 && j >= 0 && i < map.length && j < map[0].length && map[i][j] == TREE) { //if in bounds and is a tree
+          map[i][j] = FIRE;
+          int[] arr = {i , j};
+          frontier.add(arr); //any new FIRE you create must be added to the Frontier for next time
+        }
+      }
+    }
+    /*
     for (int r = 0; r < map.length; r++) {
       for (int c = 0; c < map[r].length; c++) {
         if (map[r][c] == FIRE) {  //existing fires spread new fires
@@ -78,6 +95,7 @@ public class BurnTrees{
         }
       }
     }
+    */
   }
 
   /*
@@ -87,10 +105,10 @@ public class BurnTrees{
     //If you add more instance variables you can add more here,
     //otherwise it is complete.
     for(int i = 0; i < map.length; i++){
-      int[] arr = {i , 0};
       if(map[i][0]==TREE){
         map[i][0]=FIRE;
-        frontier.add(arr);
+        int[] arr = {i , 0};
+        frontier.add(arr); //add positions that are on fire
       }
     }
   }
