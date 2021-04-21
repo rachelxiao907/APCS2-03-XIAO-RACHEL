@@ -1,12 +1,12 @@
 import java.util.*;
 public class BurnTrees{
-  private int[][]map;
+  private int[][]map; //byte[][] map;
   private int ticks;
-  private Frontier frontier;
-  private static int TREE = 2;
-  private static int FIRE = 1;
-  private static int ASH = 3;
-  private static int SPACE = 0;
+  private Frontier frontier; //ArrayDeque<int[]> frontier; (faster than a frontier class)
+  private static byte TREE = 2;
+  private static byte FIRE = 1;
+  private static byte ASH = 3;
+  private static byte SPACE = 0;
 
 
   /*DO NOT UPDATE THIS
@@ -57,6 +57,7 @@ public class BurnTrees{
     //YOU MUST IMPLEMENT THIS
     int[][] moves = {{0,1}, {0,-1}, {1,0}, {-1,0}}; //directions
     int size = frontier.size(); //only process the original FIRE, so check the size before you start removing elements
+    //for (int f = frontier.size(); f > 0; f--)
     for (int f = 0; f < size; f++) { //only check the positions that are already on fire
       int[] coor = frontier.remove(); //remove each position from the frontier
       int r = coor[0];
@@ -70,6 +71,12 @@ public class BurnTrees{
           int[] arr = {i , j};
           frontier.add(arr); //any new FIRE you create must be added to the Frontier for next time
         }
+        // try {
+        //   if (map[i][j] == TREE) {
+        //     map[i][j] = FIRE;
+        //     frontier.add(new int[]{i , j});
+        //   }
+        // } catch (ArrayIndexOutOfBoundsException e) {}
       }
     }
     /*
@@ -110,6 +117,7 @@ public class BurnTrees{
         map[i][0]=FIRE;
         int[] arr = {i , 0};
         frontier.add(arr); //add positions that are on fire
+        //frontier.add(new int[]{i,0});
       }
     }
   }
