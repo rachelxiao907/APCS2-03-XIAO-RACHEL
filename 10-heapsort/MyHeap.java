@@ -14,7 +14,7 @@ public class MyHeap {
     boolean done = false;
     while (!done) {
       int l = 2 * index + 1; //left child
-      int r = 2 * index + 1; //right child
+      int r = 2 * index + 2; //right child
       if (l >= size && r >= size) done = true; //if a leaf is reached, terminate loop
       else {
         int temp = data[index];
@@ -39,7 +39,10 @@ public class MyHeap {
   *@param data is the array to be modified
   */
   public static void buildHeap (int[] data) {
-
+    int row = ((data.length - 1) - 1) / 2; //parent of the last child
+    for (int i = row; i >= 0; i--) { //start at the last index with a child
+      pushDown(data, data.length, i); //push down children to the correct place
+    }
   }
 
   public static String print(int[] data){
@@ -57,6 +60,11 @@ public class MyHeap {
     System.out.println("arr before: " + print(arr));
     pushDown(arr, arr.length, 0);
     System.out.println("arr after: " + print(arr) + "\n");
+
+    int[] arr1 = {1, 2, 3, 4, 5, 6};
+    System.out.println("arr1: " + print(arr1));
+    buildHeap(arr1);
+    System.out.println("arr1: " + print(arr1) + "\n");
   }
 
 }
