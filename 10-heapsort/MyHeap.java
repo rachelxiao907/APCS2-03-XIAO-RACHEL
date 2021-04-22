@@ -17,9 +17,20 @@ public class MyHeap {
       int r = 2 * index + 1; //right child
       if (l >= size && r >= size) done = true; //if a leaf is reached, terminate loop
       else {
-        int max = Math.max(data[index], data[l]); //finds the larger value between the parent and left node
-        Math.max(max, data[r]); //finds the largest node
-        if (max == data[index]) done = true; //if neither child is larger, terminate loop
+        int temp = data[index];
+        int max = Math.max(temp, data[l]); //finds the larger value between the parent and left node
+        if (r < size) max = Math.max(max, data[r]); //finds the largest node if there is a right child
+        if (max == temp) done = true; //if neither child is larger, terminate loop
+        //swap with the larger of the child nodes
+        else if (max == data[l]) { //if left child is the largest
+          data[index] = data[l];
+          data[l] = temp;
+          index = l; //keep track of index
+        } else { //if right child is the largest
+          data[index] = data[r];
+          data[r] = temp;
+          index = r; //keep track of index
+        }
       }
     }
   }
@@ -29,6 +40,23 @@ public class MyHeap {
   */
   public static void buildHeap (int[] data) {
 
+  }
+
+  public static String print(int[] data){
+    String result = "[";
+    for(int i = 0; i < data.length; i++){
+      result += data[i];
+      if(i != data.length - 1) result += ", ";
+    }
+    result += "]";
+    return result;
+  }
+
+  public static void main(String[] args) {
+    int[] arr = {3, 11, 8, 7, 6, 5, 4, 2, 1};
+    System.out.println("arr before: " + print(arr));
+    pushDown(arr, arr.length, 0);
+    System.out.println("arr after: " + print(arr) + "\n");
   }
 
 }
