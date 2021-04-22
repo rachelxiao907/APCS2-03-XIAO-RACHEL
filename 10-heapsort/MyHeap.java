@@ -2,13 +2,13 @@ import java.util.*;
 
 public class MyHeap {
   /*Swap the element at the provided index downward into the correct position.
-  This will swap with the larger of the child nodes provided that child is larger.
+  This will swap with the larger of the child nodes provided thatchild is larger.
   This stops when a leaf is reached, or neither child is larger.
   *@param size the number of heap elements in the data array.
           This is needed to allow a partially full array to be provided.
   *@precondition the children of data[index] are valid heaps.
   *@precondition index is between 0 and size-1 inclusive
-  *@precondition size is between 0 and data.length-1 inclusive.
+  *@precondition size is between 0 and data.length inclusive.
   */
   private static void pushDown (int[] data, int size, int index) {
     boolean done = false;
@@ -65,6 +65,11 @@ public class MyHeap {
     System.out.println("arr1: " + print(arr1));
     buildHeap(arr1);
     System.out.println("arr1: " + print(arr1) + "\n");
+
+    int[] arr2 = {1, 10, 9, 8, 7, 1, 9};
+    System.out.println("arr2: " + print(arr2));
+    buildHeap(arr2);
+    System.out.println("arr2: " + print(arr2) + "\n");
   }
 
 }
