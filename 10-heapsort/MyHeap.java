@@ -10,12 +10,12 @@ public class MyHeap {
   *@precondition index is between 0 and size-1 inclusive
   *@precondition size is between 0 and data.length inclusive.
   */
-  private static void pushDown (int[] data, int size, int index) {
+  private static void pushDown(int[] data, int size, int index) {
     boolean done = false;
     while (!done) {
       int l = 2 * index + 1; //left child
       int r = 2 * index + 2; //right child
-      if (l >= size && r >= size) done = true; //if a leaf is reached, terminate loop
+      if (l >= size) done = true; //if a leaf is reached, terminate loop (no left child = no children)
       else {
         int temp = data[index];
         int max = Math.max(temp, data[l]); //finds the larger value between the parent and left node
@@ -38,11 +38,29 @@ public class MyHeap {
   /*Reorder the provided array to be a valid heap.
   *@param data is the array to be modified
   */
-  public static void buildHeap (int[] data) {
+  private static void buildHeap(int[] data) {
     int row = ((data.length - 1) - 1) / 2; //parent of the last child
     for (int i = row; i >= 0; i--) { //start at the last index with a child
       pushDown(data, data.length, i); //push down children to the correct place
     }
+  }
+
+  /*Swap the root node with the element at the provided index.
+  *Then push the new root down, but not past the index that it swapped with.
+  *@precondition: size is between 0 and data.length inclusive.
+  */
+  private static void remove(int[] data, int size) {
+    int temp = data[0];
+    data[0] = data[size-1]; //swap the root with the last node
+    data[size-1] = temp;
+    pushDown(data, size-1, 0); //reduce the heap size by 1 and push down the new root to the correct place
+  }
+
+  /*Sort the provided array
+  *@param data is the array to be sorted
+  */
+  public static void heapsort(int[] data) {
+
   }
 
   public static String print(int[] data){
@@ -70,6 +88,14 @@ public class MyHeap {
     System.out.println("arr2: " + print(arr2));
     buildHeap(arr2);
     System.out.println("arr2: " + print(arr2) + "\n");
+
+    int[] arr3 = {23, 1, 6, 19, 14, 18, 8, 24, 15};
+    buildHeap(arr3);
+    System.out.println("arr3: " + print(arr3));
+    remove(arr3, arr3.length);
+    System.out.println("arr3: " + print(arr3));
+    remove(arr3, arr3.length-1);
+    System.out.println("arr3: " + print(arr3) + "\n");
   }
 
 }
