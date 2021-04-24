@@ -54,13 +54,17 @@ public class MyHeap {
     data[0] = data[size-1]; //swap the root with the last node
     data[size-1] = temp;
     pushDown(data, size-1, 0); //reduce the heap size by 1 and push down the new root to the correct place
+                               //size of heap is equal to the index
   }
 
   /*Sort the provided array
   *@param data is the array to be sorted
   */
   public static void heapsort(int[] data) {
-
+    buildHeap(data); //turn the array into a heap
+    for (int i = data.length; i > 0; i--) {
+      remove(data, i); //remove all elements
+    }
   }
 
   public static String print(int[] data){
@@ -95,6 +99,8 @@ public class MyHeap {
     remove(arr3, arr3.length);
     System.out.println("arr3: " + print(arr3));
     remove(arr3, arr3.length-1);
+    System.out.println("arr3: " + print(arr3));
+    heapsort(arr3);
     System.out.println("arr3: " + print(arr3) + "\n");
   }
 
