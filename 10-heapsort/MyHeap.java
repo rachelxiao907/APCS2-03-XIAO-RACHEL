@@ -2,7 +2,7 @@ import java.util.*;
 
 public class MyHeap {
   /*Swap the element at the provided index downward into the correct position.
-  This will swap with the larger of the child nodes provided thatchild is larger.
+  This will swap with the larger of the child nodes provided that child is larger.
   This stops when a leaf is reached, or neither child is larger.
   *@param size the number of heap elements in the data array.
           This is needed to allow a partially full array to be provided.
@@ -67,41 +67,92 @@ public class MyHeap {
     }
   }
 
-  public static String print(int[] data){
-    String result = "[";
-    for(int i = 0; i < data.length; i++){
-      result += data[i];
-      if(i != data.length - 1) result += ", ";
-    }
-    result += "]";
-    return result;
-  }
-
   public static void main(String[] args) {
+    /*
     int[] arr = {3, 11, 8, 7, 6, 5, 4, 2, 1};
-    System.out.println("arr before: " + print(arr));
+    System.out.println("arr before: " + Arrays.toString(arr));
     pushDown(arr, arr.length, 0);
-    System.out.println("arr after: " + print(arr) + "\n");
+    System.out.println("arr after: " + Arrays.toString(arr) + "\n");
 
     int[] arr1 = {1, 2, 3, 4, 5, 6};
-    System.out.println("arr1: " + print(arr1));
+    System.out.println("arr1: " + Arrays.toString(arr1));
     buildHeap(arr1);
-    System.out.println("arr1: " + print(arr1) + "\n");
+    System.out.println("arr1: " + Arrays.toString(arr1) + "\n");
 
     int[] arr2 = {1, 10, 9, 8, 7, 1, 9};
-    System.out.println("arr2: " + print(arr2));
+    System.out.println("arr2: " + Arrays.toString(arr2));
     buildHeap(arr2);
-    System.out.println("arr2: " + print(arr2) + "\n");
+    System.out.println("arr2: " + Arrays.toString(arr2) + "\n");
 
     int[] arr3 = {23, 1, 6, 19, 14, 18, 8, 24, 15};
     buildHeap(arr3);
-    System.out.println("arr3: " + print(arr3));
+    System.out.println("arr3: " + Arrays.toString(arr3));
     remove(arr3, arr3.length);
-    System.out.println("arr3: " + print(arr3));
+    System.out.println("arr3: " + Arrays.toString(arr3));
     remove(arr3, arr3.length-1);
-    System.out.println("arr3: " + print(arr3));
+    System.out.println("arr3: " + Arrays.toString(arr3));
     heapsort(arr3);
-    System.out.println("arr3: " + print(arr3) + "\n");
+    System.out.println("arr3: " + Arrays.toString(arr3) + "\n");
+    */
+    int size = 10000000;
+    //sorted array
+    int[] arr = new int[size];
+    int[] check = new int[size];
+    for (int i = 0; i < size; i++) {
+      arr[i] = i;
+      check[i] = arr[i];
+    }
+    //array with one value
+    int[] arr1 = new int[size];
+    int[] check1 = new int[size];
+    for (int i = 0; i < size; i++) {
+      arr1[i] = 2;
+      check1[i] = 2;
+    }
+    //array with random values
+    int[] arr2 = new int[size];
+    int[] check2 = new int[size];
+    for (int i = 0; i < size; i++) {
+      int r = (int)(Math.random() * size);
+      arr2[i] = r;
+      check2[i] = arr2[i];
+    }
+    //array with 1s and 0s
+    int[] arr3 = new int[size];
+    int[] check3 = new int[size];
+    for (int i = 0; i < size; i++) {
+      int r = (int)(Math.random() * 2);
+      if (r == 0) arr3[i] = 0;
+      else arr3[i] = 1;
+      check3[i] = arr3[i];
+    }
+    //reverse sorted array
+    int[] arr4 = new int[size];
+    int[] check4 = new int[size];
+    for (int i = 0; i < size; i++) {
+      arr4[i] = size - i;
+      check4[i] = arr4[i];
+    }
+
+    int[] data1 = arr2;
+    int[] data2 = check2;
+
+    long t1, t2, mtime, stime;
+    t1 = System.currentTimeMillis();
+    heapsort(data1);
+    t2 = System.currentTimeMillis();
+    mtime = t2 - t1;
+    t1 = System.currentTimeMillis();
+    Arrays.sort(data2);
+    t2 = System.currentTimeMillis();
+    stime = t2 - t1;
+    System.out.println("Merge: " + mtime + "\nArray.Sort: " + stime);
+    System.out.println("Ratio: " + (double)mtime/stime);
+    if(!Arrays.equals(data1, data2)){
+      System.out.println("FAILED!");
+    } else {
+      System.out.println("WOOHOO!");
+    }
   }
 
 }
