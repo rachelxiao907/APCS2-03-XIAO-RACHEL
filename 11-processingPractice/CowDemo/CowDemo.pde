@@ -10,6 +10,7 @@ void setup() {
 void draw() {
   background(200);
   for (Cow c : particles) {
+    c.collide(particles); //check if this cow is touching any other cow
     c.move();
     c.display();
   }
@@ -23,8 +24,7 @@ void mousePressed() {
    //Right click: add a cow at the mouse location.
    //Left click: call the click of each cow 
    if (mousePressed && (mouseButton == RIGHT)) {
-     particles.add(new Cow(20+(int)(Math.random()*30), mouseX, mouseY, random(6)-3, 
-     random(6)-3));
+     particles.add(new Cow(20+(int)(Math.random()*30), mouseX, mouseY, random(6)-3, random(6)-3));
    }
    if (mousePressed && (mouseButton == LEFT)) {
      for (Cow c : particles) {
