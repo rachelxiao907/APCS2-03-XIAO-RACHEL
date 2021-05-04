@@ -47,6 +47,11 @@ public class Cow {
       stroke(0); //mouth
       fill(#E3459C);
       arc(x, y+radius/4, radius/2, radius/2, 0, 3.14);
+      
+      //display the DX and DY of the cow on the screen on the right side of the cow
+      fill(0);
+      textSize(12);
+      text("dx: "+dx + "\ndy: "+dy, x+radius, y-radius);
     }
   }
 
