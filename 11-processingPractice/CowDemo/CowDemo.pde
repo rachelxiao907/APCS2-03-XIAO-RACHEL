@@ -3,7 +3,7 @@ void setup() {
   frameRate(30);
   size(1000, 800);
   particles = new ArrayList<Cow>();
-  for (int i = 0; i < 600; i++)
+  for (int i = 0; i < 50; i++)
     particles.add(new Cow());
 }
 
@@ -23,10 +23,10 @@ void mousePressed() {
    //Read about mouseClicked()/mousePressed() and related methods in the documentation.
    //Right click: add a cow at the mouse location.
    //Left click: call the click of each cow 
-   if (mousePressed && (mouseButton == RIGHT)) {
+   if (mouseButton == RIGHT) {
      particles.add(new Cow(20+(int)(Math.random()*30), mouseX, mouseY, random(6)-3, random(6)-3));
    }
-   if (mousePressed && (mouseButton == LEFT)) {
+   if (mouseButton == LEFT) {
      for (Cow c : particles) {
        c.click();
      }

@@ -20,19 +20,24 @@ public class Cow {
   }
   
   void move() {
-    x += dx;
-    y += dy;
+    if (selected && colliding) { //when a cow is both selected and colliding, make the cow move double its speed
+      x += (2 * dx);
+      y += (2 * dy);
+    } else {
+      x += dx;
+      y += dy;
+    }
     if (x >= width - radius || x <= radius) dx *= -1;
     if (y >= height - radius || y <= radius) dy *= -1;
   }
   void display() {
     noStroke();
     fill(c);
-    if (colliding == true) {
+    if (colliding) {
       fill(255,0,0,100); //when a cow is colliding, change the display method so the cow body is RED and mostly transparent
     }
     ellipse(x, y, radius*2, radius*2);
-    if (selected == true) {
+    if (selected) {
       fill(255); //eyes
       ellipse(x-radius/3, y-radius/4, radius/2, radius/2);
       ellipse(x+radius/3, y-radius/4, radius/2, radius/2);
