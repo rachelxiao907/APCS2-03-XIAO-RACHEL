@@ -52,7 +52,7 @@ public class Cow {
       //display the DX and DY of the cow on the screen on the right side of the cow
       fill(0);
       textSize(12);
-      text("dx: "+dx + "\ndy: "+dy, x+radius, y-radius);
+      text("dx: "+dx + "\ndy: "+dy, x+radius, y);
     }
   }
 
