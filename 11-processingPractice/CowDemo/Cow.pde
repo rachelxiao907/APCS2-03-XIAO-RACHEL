@@ -61,19 +61,16 @@ public class Cow {
    //change the cow...
    if (dist(mouseX, mouseY, x, y) <= radius) {
      selected = !selected; //when a Cow is clicked on in the click method, you toggle the selected state
-     radius = 20+(int)(Math.random()*30);
-     c = color(random(255),random(255),random(255));
    }
   }
   
   void collide(ArrayList<Cow>others) {
-    boolean hold = false;
+    colliding = false;
     for (Cow cw : others) {
       if (!cw.equals(this) && dist(cw.x, cw.y, x, y) <= (cw.radius + radius)) {
-        hold = true; //when this cow is touching any other cow, it will set the colliding variable to true, otherwise it will set it to false
+        colliding = true; //when this cow is touching any other cow, it will set the colliding variable to true, otherwise it will set it to false
       }
     }
-    colliding = hold;
   }
  
 }
