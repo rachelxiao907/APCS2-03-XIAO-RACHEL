@@ -61,6 +61,8 @@ public class Cow {
    //change the cow...
    if (dist(mouseX, mouseY, x, y) <= radius) {
      selected = !selected; //when a Cow is clicked on in the click method, you toggle the selected state
+     radius = 20+(int)(Math.random()*30);
+     c = color(random(255),random(255),random(255));
    }
   }
   
