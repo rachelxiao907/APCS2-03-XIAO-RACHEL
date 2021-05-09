@@ -20,10 +20,9 @@ public class Cow {
   }
   
   void move() {
+    x += dx;
+    y += dy;
     if (selected && colliding) { //when a cow is both selected and colliding, make the cow move double its speed
-      x += (2 * dx);
-      y += (2 * dy);
-    } else {
       x += dx;
       y += dy;
     }
@@ -73,6 +72,24 @@ public class Cow {
         colliding = true; //when this cow is touching any other cow, it will set the colliding variable to true, otherwise it will set it to false
       }
     }
+  }
+  
+  /*Write a Cow method that will modify the dx and dy
+   *such that the cow will change the direction it is moving
+   *counter-clockwise by the specified angle (degrees).
+   *Test this with any of the existing cow demos. (make the cows turn 30 degrees on click)
+   */
+  void turn(float angle) {
+    
+  }
+  
+  /*Write a Cow method that will modify the dx and dy
+   *such that the cow will add dv to the magnitude of its velocity 
+   *but maintain the same direction.
+   *Test this with any of the existing cow demos. (make the cows get 2 units faster on click to test)
+   */
+  void changeSpeed(float dv) {
+    
   }
  
 }
