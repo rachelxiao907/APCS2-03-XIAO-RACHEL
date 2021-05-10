@@ -60,15 +60,16 @@ public class Cow {
    //change the cow...
    if (dist(mouseX, mouseY, x, y) <= radius) {
      selected = !selected; //when a Cow is clicked on in the click method, you toggle the selected state
-     radius = 20+(int)(Math.random()*30);
-     c = color(random(255),random(255),random(255));
+     //radius = 20+(int)(Math.random()*30);
+     //c = color(random(255),random(255),random(255));
+     //turn(30);
    }
   }
   
   void collide(ArrayList<Cow>others) {
     colliding = false;
     for (Cow cw : others) {
-      if (!cw.equals(this) && dist(cw.x, cw.y, x, y) <= (cw.radius + radius)) {
+      if (cw != this && dist(cw.x, cw.y, x, y) <= (cw.radius + radius)) {
         colliding = true; //when this cow is touching any other cow, it will set the colliding variable to true, otherwise it will set it to false
       }
     }
@@ -80,7 +81,11 @@ public class Cow {
    *Test this with any of the existing cow demos. (make the cows turn 30 degrees on click)
    */
   void turn(float angle) {
-    
+    float v = (float) Math.sqrt(dx * dx + dy * dy);
+    float a = degrees(atan2(dy,dx)); //angle of velocity
+    a -= angle; //the angle to go ccw is negative in processing
+    dx = v * cos(radians(a));
+    dy = v * sin(radians(a));
   }
   
   /*Write a Cow method that will modify the dx and dy
