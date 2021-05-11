@@ -63,6 +63,7 @@ public class Cow {
      //radius = 20+(int)(Math.random()*30);
      //c = color(random(255),random(255),random(255));
      //turn(30);
+     //changeSpeed(2);
    }
   }
   
@@ -94,7 +95,10 @@ public class Cow {
    *Test this with any of the existing cow demos. (make the cows get 2 units faster on click to test)
    */
   void changeSpeed(float dv) {
-    
+    float v = (float) Math.sqrt(dx * dx + dy * dy) + dv; //total magnitude of velocity
+    float a = degrees(atan2(dy,dx)); //direction of velocity
+    dx = v * cos(radians(a));
+    dy = v * sin(radians(a));
   }
  
 }
